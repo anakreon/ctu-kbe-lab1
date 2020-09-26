@@ -9,26 +9,39 @@ const keyRanges = [{
     end: 'Z'
 }];
 
-export function xorAutoDecrypt (hexciphertext) {
-    const rankMap = {};
-    for (var i = 0; i < keyRanges.length; ++i) {
-        const range = keyRanges[i];
-        for (var j = range.start.charCodeAt(0); j <= range.end.charCodeAt(0); ++j) {
-            const key = String.fromCharCode(j);
-            const decodedText = xorDecrypt(hexciphertext, key);
-            rankMap[key] = rank(decodedText);
+export function xorKeyLenghtDecrypt (hexciphertext, keyLength) {
+    let rankMap;
+    let foundkey = '';
+    for (var k = 0; k < keyLength; ++k) {
+        rankMap = {};
+        console.log('k', k);
+        for (var i = 0; i < keyRanges.length; ++i) {
+            const range = keyRanges[i];
+            for (var j = range.start.charCodeAt(0); j <= range.end.charCodeAt(0); ++j) {
+                const key = foundkey + String.fromCharCode(j);
+                const decodedText = xorDecrypt(hexciphertext, key);
+                rankMap[key] = rank(decodedText);
+            }
         }
+        console.log(rankMap);
+        const maxKey = findMaxKey(rankMap);
+        console.log(maxKey);
+        foundkey = maxKey;
     }
-    console.log(rankMap)
-    const key = findMaxKey(rankMap);
-    return key;
+    return foundkey;
 }
 
 function rank (text) {
     let rank = 0;
-    const match = text.match(/[a-zA-Z]{1}/gi); 
-    if (match && match.length > 0) {
-        rank = match.length;
+    // alphabet more likely
+    const alphamatch = text.match(/[a-zA-Z]{1}/gi); 
+    if (alphamatch && alphamatch.length > 0) {
+        rank += alphamatch.length * 0.5;
+    }
+    // words separated by spaces are likely
+    const spacematch = text.match(/[a-zA-Z]\s[a-zA-Z]/gi);
+    if (spacematch && spacematch.length > 0) {
+        rank += spacematch.length * 0.5;
     }
     return rank;
 }

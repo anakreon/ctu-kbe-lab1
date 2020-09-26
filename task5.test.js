@@ -1,15 +1,16 @@
 import chai from 'chai';
-import { xorAutoDecrypt } from './task5.js';
+import { xorKeyLenghtDecrypt } from './task5.js';
 import * as fs from 'fs';
 
-const taskFile = 'text1.hex';
+const taskFile = 'text2.hex';
 
 const { expect } = chai;
 
 describe('task 5', () => {    
-    it('', () => {
+    xit('', () => {
+        const keyLength = 10;
         const data = fs.readFileSync(taskFile, 'utf-8');
-        const result = xorAutoDecrypt(data);
+        const result = xorKeyLenghtDecrypt(data, keyLength);
         expect(result).to.equal('M');
     });
 });
