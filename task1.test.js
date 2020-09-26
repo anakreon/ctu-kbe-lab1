@@ -3,7 +3,7 @@ import { xorEncrypt, xorDecrypt } from './task1.js';
 
 const { expect } = chai;
 
-describe('xor', () => {    
+describe('task 1', () => {    
     it('encrypt', () => {
         const plaintext = 'everything remains raw';
         const key = 'word up';
