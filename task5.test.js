@@ -1,16 +1,22 @@
 import chai from 'chai';
-import { xorKeyLenghtDecrypt } from './task5.js';
 import * as fs from 'fs';
+import { getPartialText, xorKeyLenghtDecrypt } from './task5.js';
+import { xorDecrypt } from './task1.js';
 
 const taskFile = 'text2.hex';
 
 const { expect } = chai;
 
-describe('task 5', () => {    
-    xit('', () => {
+xdescribe('task 5', () => {    
+    it('', () => {
         const keyLength = 10;
         const data = fs.readFileSync(taskFile, 'utf-8');
-        const result = xorKeyLenghtDecrypt(data, keyLength);
-        expect(result).to.equal('M');
+        const keyResult = xorKeyLenghtDecrypt(data, keyLength);
+        
+        const result = xorDecrypt(data, keyResult);
+        //const result = xorDecrypt(data, 'Zzaaaaaaaz'); //E R
+        //console.log(getPartialText(result, 0, 10));
+        console.log(result);
+        expect(result).to.contain('Busta Rhymes up in the place,');
     });
 });

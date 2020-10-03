@@ -6,8 +6,8 @@ const taskFile = 'text2.hex';
 
 const { expect } = chai;
 
-describe('task 5-bf', () => {    
-    xit('', () => {
+xdescribe('task 5-bf', () => {    
+    it('', () => {
         const keyLength = 10;
         const data = fs.readFileSync(taskFile, 'utf-8');
         const result = xorKeyLenghtDecrypt(data, keyLength);
@@ -15,7 +15,7 @@ describe('task 5-bf', () => {
     });
 
 
-    xdescribe('increment', () => {
+    describe('increment', () => {
         const max = 95;
         it('increment', () => {
             const permutation = [0,0,0,0,0,0];

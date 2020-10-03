@@ -15,11 +15,4 @@ describe('task 3', () => {
         console.log(result);
         expect(result).to.contain('Busta Rhymes up in the place,');
     });
-    xit('2', () => {
-        const data = fs.readFileSync(taskFile, 'utf-8');
-        const key = 'rrrrbreSpb';
-        const result = xorDecrypt(data, key);
-        console.log(result);
-        expect(result).to.contain('Busta Rhymes up in the place,');
-    });
 });
